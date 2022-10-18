@@ -5,6 +5,7 @@ import re
 import openpyxl
 import pyautogui as pg
 import os
+import configparser
 
 url = 'https://instagram.com/kitty_in_the_big_city?utm_medium=copy_link'
 driver = webdriver.Chrome(executable_path="C:\\Users\\tisk0\\PycharmProjects\\chromedriver_win32\\chromedriver.exe")
@@ -12,11 +13,15 @@ driver.maximize_window()
 driver.implicitly_wait(10)
 
 #ログイン
+r_config = configparser.ConfigParser()
+r_config.read('Config.ini')
+ID = r_config.get('login', 'id')
+PASSWORD = r_config.get('login', 'password')
 driver.get('https://www.instagram.com/accounts/login/')
 id_element = driver.find_element_by_css_selector('#loginForm > div > div:nth-child(1) > div > label > input')
-id_element.send_keys('ceeeetoooon')
+id_element.send_keys(ID)
 password_element = driver.find_element_by_css_selector('#loginForm > div > div:nth-child(2) > div > label > input')
-password_element.send_keys('testtest777')
+password_element.send_keys(PASSWORD)
 button_element = driver.find_element_by_css_selector('#loginForm > div > div:nth-child(3)')
 button_element.click()
 time.sleep(5)

@@ -3,3 +3,4 @@
 /workspace.xml
 .DS_Store
 .idea/
+*.ini
