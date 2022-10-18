@@ -8,6 +8,7 @@ from tkinter import ttk
 import os, tkinter, tkinter.filedialog, tkinter.messagebox
 import threading
 import openpyxl
+import configparser
 
 def clicked():
     thread1 = threading.Thread(target=function)
@@ -80,13 +81,17 @@ def function():
 
     #try:
     #ログイン
+    r_config = configparser.ConfigParser()
+    r_config.read('Config.ini')
+    ID = r_config.get('login', 'id')
+    PASSWORD = r_config.get('login', 'password')
     driver.get('https://www.instagram.com/')
     time.sleep(2)
     #driver.save_screenshot('エラー確認.png')
     id_element = driver.find_element_by_css_selector('#loginForm > div > div:nth-child(1) > div > label > input')
-    id_element.send_keys('ceeeetoooon')
+    id_element.send_keys(ID)
     password_element = driver.find_element_by_css_selector('#loginForm > div > div:nth-child(2) > div > label > input')
-    password_element.send_keys('testtest777')
+    password_element.send_keys(PASSWORD)
     button_element = driver.find_element_by_css_selector('#loginForm > div > div:nth-child(3)')
     button_element.click()
     time.sleep(5)
